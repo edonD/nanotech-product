@@ -15,9 +15,24 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 50);
+
+      // Track active section
+      const sections = navLinks.map((l) => l.href.slice(1));
+      let current = "";
+      for (const id of sections) {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 200) current = id;
+        }
+      }
+      setActiveSection(current);
+    };
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -61,7 +76,11 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-slate-400 hover:text-cyan-400 transition-colors duration-200"
+              className={`text-sm transition-colors duration-200 ${
+                activeSection === link.href.slice(1)
+                  ? "text-cyan-400"
+                  : "text-slate-400 hover:text-cyan-400"
+              }`}
             >
               {link.label}
             </a>
