@@ -62,7 +62,7 @@ export default function Market() {
           <h3 className="text-2xl font-bold text-white text-center mb-8">
             Competitive Landscape
           </h3>
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto rounded-xl border border-white/[0.06] bg-white/[0.01]">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-white/[0.08]">
@@ -71,7 +71,7 @@ export default function Market() {
                     <th
                       key={c.name}
                       className={`text-center py-3 px-4 text-xs font-mono ${
-                        c.highlight ? 'text-cyan-400' : 'text-slate-500'
+                        c.highlight ? 'text-cyan-400 bg-cyan-500/[0.04]' : 'text-slate-500'
                       }`}
                     >
                       {c.name}
@@ -80,98 +80,79 @@ export default function Market() {
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-b border-white/[0.04]">
-                  <td className="py-3 px-4 text-slate-400">Time to result</td>
-                  {competitors.map((c) => (
-                    <td key={c.name} className={`text-center py-3 px-4 ${c.highlight ? 'text-cyan-400 font-semibold' : 'text-slate-400'}`}>
-                      {c.time}
-                    </td>
-                  ))}
-                </tr>
-                <tr className="border-b border-white/[0.04]">
-                  <td className="py-3 px-4 text-slate-400">Direct from sample</td>
-                  {competitors.map((c) => (
-                    <td key={c.name} className={`text-center py-3 px-4 ${c.highlight ? 'text-cyan-400' : 'text-slate-400'}`}>
-                      {c.direct ? '✓' : '✗'}
-                    </td>
-                  ))}
-                </tr>
-                <tr className="border-b border-white/[0.04]">
-                  <td className="py-3 px-4 text-slate-400">Point of care</td>
-                  {competitors.map((c) => (
-                    <td key={c.name} className={`text-center py-3 px-4 ${c.highlight ? 'text-cyan-400' : 'text-slate-400'}`}>
-                      {c.poc ? '✓' : '✗'}
-                    </td>
-                  ))}
-                </tr>
-                <tr className="border-b border-white/[0.04]">
-                  <td className="py-3 px-4 text-slate-400">Reader cost</td>
-                  {competitors.map((c) => (
-                    <td key={c.name} className={`text-center py-3 px-4 ${c.highlight ? 'text-cyan-400 font-semibold' : 'text-slate-400'}`}>
-                      {c.cost}
-                    </td>
-                  ))}
-                </tr>
-                <tr className="border-b border-white/[0.04]">
-                  <td className="py-3 px-4 text-slate-400">Portable</td>
-                  {competitors.map((c) => (
-                    <td key={c.name} className={`text-center py-3 px-4 ${c.highlight ? 'text-cyan-400' : 'text-slate-400'}`}>
-                      {c.portable ? '✓' : '✗'}
-                    </td>
-                  ))}
-                </tr>
-                <tr>
-                  <td className="py-3 px-4 text-slate-400">Operator</td>
-                  {competitors.map((c) => (
-                    <td key={c.name} className={`text-center py-3 px-4 ${c.highlight ? 'text-cyan-400 font-semibold' : 'text-slate-400'}`}>
-                      {c.operator}
-                    </td>
-                  ))}
-                </tr>
+                {[
+                  { label: 'Time to result', key: 'time' as const, bold: true },
+                  { label: 'Direct from sample', key: 'direct' as const },
+                  { label: 'Point of care', key: 'poc' as const },
+                  { label: 'Reader cost', key: 'cost' as const, bold: true },
+                  { label: 'Portable', key: 'portable' as const },
+                  { label: 'Operator', key: 'operator' as const, bold: true },
+                ].map((row, ri) => (
+                  <tr key={row.label} className={`border-b border-white/[0.04] ${ri % 2 === 0 ? 'bg-white/[0.01]' : ''}`}>
+                    <td className="py-3 px-4 text-slate-400">{row.label}</td>
+                    {competitors.map((c) => {
+                      const val = c[row.key];
+                      const display = typeof val === 'boolean' ? (val ? '✓' : '✗') : val;
+                      return (
+                        <td key={c.name} className={`text-center py-3 px-4 ${
+                          c.highlight
+                            ? `text-cyan-400 bg-cyan-500/[0.04] ${row.bold ? 'font-semibold' : ''}`
+                            : `text-slate-400 ${typeof val === 'boolean' && !val ? 'text-slate-600' : ''}`
+                        }`}>
+                          {display}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
         </AnimatedSection>
 
-        {/* Business model + Regulatory */}
-        <div className="grid md:grid-cols-2 gap-6">
+        {/* Business model + Regulatory + Funding */}
+        <div className="grid md:grid-cols-3 gap-6">
           <AnimatedSection direction="left">
             <GlassCard className="h-full">
               <h4 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
                 <span className="text-cyan-400">&#9670;</span> Business Model
               </h4>
-              <div className="space-y-4 text-sm">
+              <div className="space-y-3 text-sm">
                 <div className="flex justify-between items-center p-3 rounded-lg bg-white/[0.02]">
                   <span className="text-slate-400">Reader</span>
-                  <span className="text-white font-semibold">$4,500 <span className="text-slate-500 font-normal">(subsidized)</span></span>
+                  <span className="text-white font-semibold">$4,500</span>
                 </div>
                 <div className="flex justify-between items-center p-3 rounded-lg bg-white/[0.02]">
-                  <span className="text-slate-400">Chip (per test)</span>
-                  <span className="text-white font-semibold">$45 <span className="text-slate-500 font-normal">(~$30 COGS at volume)</span></span>
+                  <span className="text-slate-400">Chip / test</span>
+                  <span className="text-white font-semibold">$45</span>
                 </div>
                 <div className="flex justify-between items-center p-3 rounded-lg bg-white/[0.02]">
-                  <span className="text-slate-400">Per-hospital revenue</span>
-                  <span className="text-white font-semibold">$50K-$200K<span className="text-slate-500 font-normal">/yr</span></span>
+                  <span className="text-slate-400">Hospital rev</span>
+                  <span className="text-white font-semibold">$50-200K/yr</span>
                 </div>
-                <p className="text-slate-500 text-xs mt-2">
-                  Razor/razorblade model: low-margin reader placement drives high-margin recurring chip revenue.
+                <div className="flex justify-between items-center p-3 rounded-lg bg-white/[0.02]">
+                  <span className="text-slate-400">Chip COGS</span>
+                  <span className="text-green-400 font-semibold">~$5 at 1M/yr</span>
+                </div>
+                <p className="text-slate-600 text-xs mt-1">
+                  Razor/razorblade: low-margin reader, high-margin recurring chips.
                 </p>
               </div>
             </GlassCard>
           </AnimatedSection>
 
-          <AnimatedSection direction="right">
+          <AnimatedSection>
             <GlassCard className="h-full">
               <h4 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
                 <span className="text-cyan-400">&#9670;</span> Regulatory Pathway
               </h4>
               <div className="space-y-3">
                 {[
-                  { phase: 'Phase 1', time: 'Year 1-2', label: 'Research Use Only (RUO)', desc: 'No FDA clearance required. Sell to research hospitals.' },
-                  { phase: 'Phase 2', time: 'Year 2-3', label: 'FDA 510(k) / De Novo', desc: 'UTI indication first. Parallel CE marking for EU.' },
-                  { phase: 'Phase 3', time: 'Year 3-5', label: 'Expanded Indications', desc: 'Bloodstream infections, wounds, respiratory.' },
+                  { phase: 'Phase 1', time: 'Yr 1-2', label: 'Research Use Only', desc: 'No FDA clearance needed. Sell to academic centers.', active: true },
+                  { phase: 'Phase 2', time: 'Yr 2-3', label: 'FDA 510(k) / De Novo', desc: 'UTI indication first. CE marking for EU.', active: false },
+                  { phase: 'Phase 3', time: 'Yr 3-5', label: 'Expanded Indications', desc: 'BSI, wounds, respiratory. WHO prequalification.', active: false },
                 ].map((item) => (
-                  <div key={item.phase} className="flex gap-3 p-3 rounded-lg bg-white/[0.02]">
+                  <div key={item.phase} className={`flex gap-3 p-3 rounded-lg ${item.active ? 'bg-cyan-500/[0.05] border border-cyan-500/10' : 'bg-white/[0.02]'}`}>
                     <div>
                       <div className="text-xs font-mono text-cyan-400">{item.phase} — {item.time}</div>
                       <div className="text-sm text-white font-semibold">{item.label}</div>
@@ -179,6 +160,36 @@ export default function Market() {
                     </div>
                   </div>
                 ))}
+              </div>
+            </GlassCard>
+          </AnimatedSection>
+
+          <AnimatedSection direction="right">
+            <GlassCard className="h-full">
+              <h4 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                <span className="text-cyan-400">&#9670;</span> Funding Alignment
+              </h4>
+              <div className="space-y-3">
+                <div className="p-3 rounded-lg bg-green-500/[0.03] border border-green-500/10">
+                  <div className="text-xs font-mono text-green-400">CARB-X 2026</div>
+                  <div className="text-sm text-white font-semibold">$1-5M non-dilutive</div>
+                  <div className="text-xs text-slate-500 mt-0.5">&quot;Diagnosis of acute infections in 60 min or less&quot; — direct match</div>
+                </div>
+                <div className="p-3 rounded-lg bg-white/[0.02]">
+                  <div className="text-xs font-mono text-blue-400">BARDA DRIVe</div>
+                  <div className="text-sm text-white font-semibold">$1-10M milestone</div>
+                  <div className="text-xs text-slate-500 mt-0.5">Post-prototype diagnostics innovation</div>
+                </div>
+                <div className="p-3 rounded-lg bg-white/[0.02]">
+                  <div className="text-xs font-mono text-purple-400">NIH SBIR</div>
+                  <div className="text-sm text-white font-semibold">$150K Phase I</div>
+                  <div className="text-xs text-slate-500 mt-0.5">Bridge to seed round</div>
+                </div>
+                <div className="p-3 rounded-lg bg-cyan-500/[0.03] border border-cyan-500/10">
+                  <div className="text-xs font-mono text-cyan-400">Seed VC</div>
+                  <div className="text-sm text-white font-semibold">$2.5M target</div>
+                  <div className="text-xs text-slate-500 mt-0.5">Chip proto + reader dev + clinical validation</div>
+                </div>
               </div>
             </GlassCard>
           </AnimatedSection>
