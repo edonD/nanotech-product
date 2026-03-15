@@ -2,6 +2,7 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Problem from "./components/Problem";
 import Technology from "./components/Technology";
+import Science from "./components/Science";
 import Product from "./components/Product";
 import Applications from "./components/Applications";
 import About from "./components/About";
@@ -17,6 +18,7 @@ export default function Home() {
       <Problem />
       <div className="section-divider" />
       <Technology />
+      <Science />
       <div className="section-divider" />
       <Product />
       <div className="section-divider" />
