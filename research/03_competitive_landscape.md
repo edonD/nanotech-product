@@ -87,6 +87,14 @@ Sample → POC Device → Direct AST (<60 min) → Immediate Targeted Treatment
 - Clinical validation pathway is complex
 - But: ALL the underlying technologies now exist (demonstrated in academic labs 2024-2025)
 
+## Additional Competitors (Updated March 2026)
+
+- **Bacteromic** (System 2.0): 640 microfluidic testing wells, 30+ antimicrobials, 10 samples simultaneously — but still a lab benchtop system, not POC
+- **QuickMIC®** (Gradientech/Hardy Diagnostics): Ultra-rapid AST for sepsis — from positive blood culture, not direct sample; lab-based
+- **Resistell Phenotech MultiStar**: Fully automated, 2h TTR, entering clinical trials 2026 — high-throughput lab instrument, not portable
+
+**Assessment**: No new entrants have targeted the portable POC space. All competitors remain lab-based benchtop systems requiring trained operators and positive blood cultures. RAPIDE's direct-from-sample, portable, nurse-operable positioning remains unique.
+
 ## Sources
 - Nature Communications, "Next-generation rapid phenotypic AST" (2024)
 - Journal of Clinical Microbiology, "Emerging technologies for rapid phenotypic AST" (2025)

@@ -1,88 +1,74 @@
 # Veridion Microsystems — RAPIDE Chip Platform
 
-## Current Phase: Complete
+> *"Every minute matters. Know resistance in minutes, not days."*
 
-## Research Findings
+## Current Phase: Complete — Iterating
 
-### Landscape Covered
-- **Nanotechnology**: nanofabrication (EUV lithography nanopores), nanofluidics, nanophotonics, self-assembly
-- **BioMEMS**: point-of-care diagnostics, organ-on-chip, wearable/implantable sensors, neural probes, microneedle patches
-- **Microsystems**: MEMS gas sensors, photoacoustic spectroscopy, acoustic microfluidics, PMUT/CMUT, edge-AI sensors
+---
 
-### Key Breakthroughs Discovered
-1. **Wafer-scale solid-state nanopores** via EUV lithography (imec, IEDM 2025)
-2. **Single-cell microfluidic AST** in 30-120 min vs 48-72h standard
-3. **MEMS photoacoustic gas sensors** at ppb-level in palm-sized modules
-4. **ML + centrifugal microfluidics** for sepsis prediction (94% sensitivity, 50µL blood)
-5. **Microneedle CGM** with 50x miniaturization vs commercial devices
-
-### Most Promising Thread
-**Rapid Antibiotic Susceptibility Testing (AST)** — AMR kills 1.27M/year, costs $66B/year. All existing rapid AST products are lab-only benchtop instruments ($50K-$180K). Zero point-of-care devices exist.
-
-## Product Concept: RAPIDE Chip
+## The Product
 
 **RAPIDE** = Rapid Antimicrobial Profiling via Integrated Detection Electronics
 
-A disposable MEMS microfluidic chip + portable reader that delivers antibiotic susceptibility results **in under 60 minutes**, directly from a patient sample, at the point of care.
+A disposable MEMS microfluidic chip + portable reader delivering antibiotic susceptibility results **in under 60 minutes**, directly from a patient sample, at the point of care. No overnight culture. No lab required.
 
-### Why It Matters
-- 1.27M direct deaths/year from AMR
-- Every hour of delayed sepsis treatment increases mortality by ~7%
-- Current AST takes 48-72 hours
-- Zero portable POC AST products exist worldwide
+| Feature | RAPIDE | Standard AST | Best Competitor |
+|---------|--------|-------------|----------------|
+| Time | <60 min | 48-72 hours | 2-7 hours |
+| Direct from sample | Yes | No | No (needs culture) |
+| Point of care | Yes | No | No (lab only) |
+| Reader cost | <$5K | $50K+ | $80-180K |
+| Operator | Nurse | Lab tech | Lab tech |
+| Portable | 4.8 kg | No | No |
 
-### Key Specs
-| Feature | RAPIDE | Standard AST |
-|---------|--------|-------------|
-| Time | <60 min | 48-72 hours |
-| Direct from sample | Yes | No (needs culture) |
-| Point of care | Yes | No (lab only) |
-| Reader cost | <$5K | $50K-$180K |
-| Operator | Nurse | Lab technician |
+## Why This Matters
+
+- **1.27M** direct deaths/year from antimicrobial resistance
+- **$24B/year** — sepsis is the most expensive condition in US healthcare
+- **~7%** mortality increase per hour of delayed appropriate therapy in sepsis
+- **Zero** portable point-of-care AST products exist worldwide
+- **$4.2B** AST market → **$7.5B by 2030**
+
+## Research Documents
+
+| File | Description |
+|------|-------------|
+| `research/01_landscape_overview.md` | Comprehensive landscape across nanotech, BioMEMS, microsystems |
+| `research/02_deep_dive_promising_threads.md` | Deep analysis of 5 product candidates |
+| `research/03_competitive_landscape.md` | Detailed competitor analysis (updated March 2026) |
+| `research/04_regulatory_and_manufacturing.md` | FDA pathway, manufacturing costs, production scale |
+| `research/05_technical_validation.md` | TRL assessment of DLD, impedance, edge AI subsystems |
+| `research/06_funding_and_economics.md` | CARB-X, BARDA funding + hospital economics |
+| `product_brief.md` | Full product brief with specs, market, competition, strategy |
 
 ## Website
 
-### Sections Completed
-- [x] Hero — gradient text, animated background, stats bar
-- [x] Problem — AMR death stats, timeline comparison visualization
-- [x] Technology — 3-layer chip architecture, 5-step process flow, convergence reasons
-- [x] Product — chip diagram, reader UI mock, comparison table
-- [x] Applications — 6 use cases with SVG icons, impact stats, market opportunity
-- [x] About — mission, technical expertise, strategic partnerships
-- [x] Contact — 3 CTA cards, email
-- [x] Footer
-- [x] Responsive mobile layout
-- [x] Framer Motion scroll-triggered animations
-
-### Visual Quality Assessment
-- Dark deep-blue background with subtle gradients and grid pattern
-- Glassmorphism cards with backdrop blur
-- Smooth scroll-triggered animations on all sections
-- Clean typography with generous spacing
-- SVG icons throughout (no emoji dependencies)
-- Professional, authoritative feel — investor-presentation ready
-- 3 visual review cycles completed
-
 ### Tech Stack
-- Next.js 16 (App Router)
-- TypeScript
-- Tailwind CSS v4
-- Framer Motion for animations
-- Puppeteer for visual review
+- Next.js 16 (App Router) + TypeScript + Tailwind CSS v4 + Framer Motion
+- Canvas particle animation, scroll-triggered animations, animated counters
 
-## What's New
-- **2026-03-15 (4)**: Visual review cycle 2+3 complete. Replaced all emojis with SVGs, enhanced comparison table, verified full-page and mobile rendering. Final build verified.
-- **2026-03-15 (3)**: Website v1 complete with all 7 sections.
-- **2026-03-15 (2)**: Phase 2 complete — product brief written for Veridion RAPIDE chip platform.
-- **2026-03-15 (1)**: Phase 1 complete — exhaustive research across nanotech, BioMEMS, microsystems.
+### Sections
+Hero | Problem | Technology | Science Citations | Product | Applications | About | Contact
 
-## Running the Website
+### Visual Quality
+- 3 visual review cycles completed via Puppeteer screenshots
+- Dark deep-blue theme with glassmorphism, gradient accents
+- SVG icons throughout (no emoji dependencies)
+- Responsive desktop + mobile layout
+- Investor-presentation quality
 
+### Run Locally
 ```bash
-cd website
-npm install
-npm run build
-npm start
+cd website && npm install && npm run build && npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+## Progress Log
+
+| Time | Milestone |
+|------|-----------|
+| 2026-03-15 (6) | Animated counters, updated competitive landscape, economics research |
+| 2026-03-15 (5) | Science citations section, technical validation research |
+| 2026-03-15 (4) | Particle animation, regulatory/manufacturing research |
+| 2026-03-15 (3) | Visual review cycles 2-3, SVG icons, comparison table polish |
+| 2026-03-15 (2) | Website v1 complete — all 7 sections built and verified |
+| 2026-03-15 (1) | Phase 1 research + Phase 2 product brief complete |
