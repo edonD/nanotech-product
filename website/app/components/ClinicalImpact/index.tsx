@@ -14,6 +14,7 @@ const useCases = [
     statLabel: 'US sepsis deaths/year',
     color: 'text-red-400',
     borderColor: 'border-red-500/15',
+    accentColor: 'bg-red-500',
   },
   {
     title: 'Surgical Infections',
@@ -23,6 +24,7 @@ const useCases = [
     statLabel: 'Annual SSI cost',
     color: 'text-amber-400',
     borderColor: 'border-amber-500/15',
+    accentColor: 'bg-amber-500',
   },
   {
     title: 'Rural & Field Hospitals',
@@ -32,6 +34,7 @@ const useCases = [
     statLabel: 'AMR deaths in low-income countries',
     color: 'text-green-400',
     borderColor: 'border-green-500/15',
+    accentColor: 'bg-green-500',
   },
   {
     title: 'UTI Diagnostics',
@@ -41,6 +44,7 @@ const useCases = [
     statLabel: 'Global UTI cases/year',
     color: 'text-blue-400',
     borderColor: 'border-blue-500/15',
+    accentColor: 'bg-blue-500',
   },
   {
     title: 'Antibiotic Stewardship',
@@ -50,6 +54,7 @@ const useCases = [
     statLabel: 'Reduction in broad-spectrum Rx',
     color: 'text-cyan-400',
     borderColor: 'border-cyan-500/15',
+    accentColor: 'bg-cyan-500',
   },
   {
     title: 'Developing World',
@@ -59,6 +64,7 @@ const useCases = [
     statLabel: 'Global AMR-associated deaths',
     color: 'text-purple-400',
     borderColor: 'border-purple-500/15',
+    accentColor: 'bg-purple-500',
   },
 ];
 
@@ -77,23 +83,26 @@ export default function ClinicalImpact() {
         {/* Impact metrics */}
         <AnimatedSection className="mb-16">
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <div className="text-center p-6 rounded-2xl border border-cyan-500/10 bg-cyan-500/[0.02]">
+            <div className="text-center p-8 rounded-2xl border border-cyan-500/10 bg-gradient-to-br from-cyan-500/[0.06] to-cyan-900/[0.02] backdrop-blur-sm">
               <div className="text-4xl md:text-5xl font-bold text-cyan-400 mb-2">
-                72h <span className="text-white">&#8594;</span> 1h
+                <AnimatedCounter end={72} className="text-cyan-400" />h{' '}
+                <span className="text-white">&#8594;</span>{' '}
+                <AnimatedCounter end={1} className="text-cyan-400" />h
               </div>
-              <div className="text-slate-400">Time to targeted therapy</div>
+              <div className="text-slate-400 font-medium">Time to targeted therapy</div>
             </div>
-            <div className="text-center p-6 rounded-2xl border border-green-500/10 bg-green-500/[0.02]">
+            <div className="text-center p-8 rounded-2xl border border-green-500/10 bg-gradient-to-br from-green-500/[0.06] to-green-900/[0.02] backdrop-blur-sm">
               <div className="text-4xl md:text-5xl font-bold text-green-400 mb-2">
                 <AnimatedCounter end={50} suffix="K+" className="text-green-400" />
               </div>
-              <div className="text-slate-400">US lives saveable per year</div>
+              <div className="text-slate-400 font-medium">US lives saveable per year</div>
             </div>
-            <div className="text-center p-6 rounded-2xl border border-amber-500/10 bg-amber-500/[0.02]">
+            <div className="text-center p-8 rounded-2xl border border-amber-500/10 bg-gradient-to-br from-amber-500/[0.06] to-amber-900/[0.02] backdrop-blur-sm">
               <div className="text-4xl md:text-5xl font-bold text-amber-400 mb-2">
-                $5-15B
+                $<AnimatedCounter end={5} className="text-amber-400" />-
+                <AnimatedCounter end={15} className="text-amber-400" />B
               </div>
-              <div className="text-slate-400">Annual US healthcare savings</div>
+              <div className="text-slate-400 font-medium">Annual US healthcare savings</div>
             </div>
           </div>
         </AnimatedSection>
@@ -102,7 +111,9 @@ export default function ClinicalImpact() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {useCases.map((uc, i) => (
             <AnimatedSection key={uc.title} delay={i * 0.08}>
-              <GlassCard className="h-full" glow="cyan">
+              <GlassCard className="h-full overflow-hidden" glow="cyan">
+                {/* Colored accent bar */}
+                <div className={`absolute top-0 left-0 right-0 h-1 ${uc.accentColor} opacity-60 rounded-t-2xl`} />
                 <div className={`text-xs font-mono ${uc.color} tracking-wider mb-3 uppercase`}>
                   {uc.stat} — {uc.statLabel}
                 </div>
@@ -118,15 +129,21 @@ export default function ClinicalImpact() {
 
         {/* ROI callout */}
         <AnimatedSection delay={0.3} className="mt-16">
-          <div className="max-w-3xl mx-auto p-8 rounded-2xl border border-green-500/15 bg-green-500/[0.02] text-center">
-            <h3 className="text-2xl font-bold text-white mb-4">Hospital ROI</h3>
-            <p className="text-slate-400 leading-relaxed">
-              A single avoided ICU day saves <span className="text-green-400 font-semibold">$2,000-$4,000</span>.
-              With a per-test cost of ~$45 and an average of{' '}
-              <span className="text-green-400 font-semibold">1.75-6 fewer hospital days</span> per
-              sepsis patient on targeted therapy, the RAPIDE chip delivers{' '}
-              <span className="text-green-400 font-semibold">$3,500-$24,000 in savings per patient</span>.
-            </p>
+          <div className="max-w-3xl mx-auto p-[1px] rounded-2xl bg-gradient-to-r from-green-500/40 via-cyan-500/20 to-green-500/40">
+            <div className="p-8 rounded-2xl bg-slate-950/90 backdrop-blur-sm text-center">
+              <div className="inline-flex items-center gap-2 text-xs font-mono text-green-400 tracking-wider uppercase mb-4">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                Proven ROI
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-4">Hospital ROI</h3>
+              <p className="text-slate-400 leading-relaxed">
+                A single avoided ICU day saves <span className="text-green-400 font-semibold">$2,000-$4,000</span>.
+                With a per-test cost of ~$45 and an average of{' '}
+                <span className="text-green-400 font-semibold">1.75-6 fewer hospital days</span> per
+                sepsis patient on targeted therapy, the RAPIDE chip delivers{' '}
+                <span className="text-green-400 font-semibold">$3,500-$24,000 in savings per patient</span>.
+              </p>
+            </div>
           </div>
         </AnimatedSection>
       </div>
