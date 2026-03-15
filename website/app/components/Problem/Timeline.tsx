@@ -3,11 +3,11 @@
 import AnimatedSection from '../ui/AnimatedSection';
 
 const currentSteps = [
-  { time: '0h', label: 'Sample collected', icon: '🩸', detail: 'Blood culture drawn at bedside' },
-  { time: '18-24h', label: 'Overnight culture', icon: '🧫', detail: 'Growing pathogen in incubator' },
-  { time: '24-36h', label: 'Colony isolation', icon: '🔬', detail: 'Pure colonies selected manually' },
-  { time: '36-56h', label: 'AST incubation', icon: '⏳', detail: 'Another 16-24h for susceptibility' },
-  { time: '48-72h', label: 'Results to clinician', icon: '📋', detail: 'Finally actionable data' },
+  { time: '0h', label: 'Sample collected', detail: 'Blood culture drawn at bedside' },
+  { time: '18-24h', label: 'Overnight culture', detail: 'Growing pathogen in incubator' },
+  { time: '24-36h', label: 'Colony isolation', detail: 'Pure colonies selected manually' },
+  { time: '36-56h', label: 'AST incubation', detail: 'Another 16-24h for susceptibility' },
+  { time: '48-72h', label: 'Results to clinician', detail: 'Finally actionable data' },
 ];
 
 const rapideSteps = [
@@ -34,8 +34,8 @@ export default function Timeline() {
             {currentSteps.map((step, i) => (
               <div key={step.label} className="flex items-start gap-4">
                 <div className="flex flex-col items-center">
-                  <div className="w-10 h-10 rounded-full border border-red-500/20 bg-red-500/10 flex items-center justify-center text-sm">
-                    {step.icon}
+                  <div className="w-10 h-10 rounded-full border border-red-500/20 bg-red-500/10 flex items-center justify-center">
+                    <div className="w-2 h-2 rounded-full bg-red-400" />
                   </div>
                   {i < currentSteps.length - 1 && (
                     <div className="w-px h-8 bg-gradient-to-b from-red-500/20 to-transparent mt-1" />

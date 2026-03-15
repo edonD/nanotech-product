@@ -94,6 +94,41 @@ export default function HowItWorks() {
             </p>
           </div>
         </AnimatedSection>
+
+        {/* Why Now — The Convergence */}
+        <div className="mt-24">
+          <AnimatedSection className="text-center mb-12">
+            <span className="text-sm font-mono text-cyan-400 tracking-[0.2em] uppercase mb-4 block">Why Now</span>
+            <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">The Convergence</h3>
+            <p className="text-slate-400 max-w-2xl mx-auto">
+              Three recent breakthroughs make RAPIDE possible today when it wasn&apos;t 3 years ago.
+            </p>
+          </AnimatedSection>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            <AnimatedSection delay={0}>
+              <div className="h-full p-6 rounded-2xl border border-cyan-500/15 bg-cyan-500/[0.02] backdrop-blur-sm">
+                <span className="text-xs font-mono text-cyan-400 tracking-wider">2024-2025</span>
+                <h4 className="text-lg font-bold text-white mt-2 mb-3">Single-Cell Microfluidic AST</h4>
+                <p className="text-sm text-slate-400 leading-relaxed">Multiple academic groups published proof that bacterial susceptibility can be determined from single-cell growth dynamics in under 60 minutes using microfluidic confinement.</p>
+              </div>
+            </AnimatedSection>
+            <AnimatedSection delay={0.1}>
+              <div className="h-full p-6 rounded-2xl border border-blue-500/15 bg-blue-500/[0.02] backdrop-blur-sm">
+                <span className="text-xs font-mono text-blue-400 tracking-wider">2025</span>
+                <h4 className="text-lg font-bold text-white mt-2 mb-3">MEMS Impedance at Scale</h4>
+                <p className="text-sm text-slate-400 leading-relaxed">Advances in MEMS fabrication enabled interdigitated electrode arrays with 5µm features on glass/silicon substrates at costs compatible with disposable chips.</p>
+              </div>
+            </AnimatedSection>
+            <AnimatedSection delay={0.2}>
+              <div className="h-full p-6 rounded-2xl border border-purple-500/15 bg-purple-500/[0.02] backdrop-blur-sm">
+                <span className="text-xs font-mono text-purple-400 tracking-wider">2024-2025</span>
+                <h4 className="text-lg font-bold text-white mt-2 mb-3">Edge AI on Microcontrollers</h4>
+                <p className="text-sm text-slate-400 leading-relaxed">TinyML inference on low-power MCUs enables complex growth curve classification directly on a portable reader. No cloud connection required.</p>
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
       </div>
     </section>
   );

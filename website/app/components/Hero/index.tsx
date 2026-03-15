@@ -1,11 +1,9 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import dynamic from 'next/dynamic';
 import HeroContent from './HeroContent';
 import HeroStats from './HeroStats';
-
-const HeroScene = dynamic(() => import('./HeroScene'), { ssr: false });
+import HeroScene from './HeroScene';
 
 export default function Hero() {
   return (

@@ -3,17 +3,15 @@
 import SectionHeader from '../ui/SectionHeader';
 import AnimatedSection from '../ui/AnimatedSection';
 import GlassCard from '../ui/GlassCard';
-import dynamic from 'next/dynamic';
-
-const ReaderScene = dynamic(() => import('./ReaderScene'), { ssr: false });
+import ReaderScene from './ReaderScene';
 
 const specs = [
-  { label: 'Dimensions', value: '30 × 20 × 15 cm', icon: '📐' },
-  { label: 'Weight', value: '< 5 kg (4.8 kg)', icon: '⚖️' },
-  { label: 'Cost', value: '< $5,000', icon: '💰' },
-  { label: 'Connectivity', value: 'Wi-Fi, Bluetooth, USB', icon: '📡' },
-  { label: 'Inference', value: 'Edge AI, no cloud needed', icon: '🧠' },
-  { label: 'EMR Integration', value: 'HL7 FHIR compatible', icon: '🏥' },
+  { label: 'Dimensions', value: '30 × 20 × 15 cm', abbr: 'DIM' },
+  { label: 'Weight', value: '< 5 kg (4.8 kg)', abbr: 'WT' },
+  { label: 'Cost', value: '< $5,000', abbr: '$' },
+  { label: 'Connectivity', value: 'Wi-Fi, Bluetooth, USB', abbr: 'RF' },
+  { label: 'Inference', value: 'Edge AI, no cloud needed', abbr: 'AI' },
+  { label: 'EMR Integration', value: 'HL7 FHIR compatible', abbr: 'EMR' },
 ];
 
 const features = [
@@ -64,7 +62,7 @@ export default function Reader() {
                     key={spec.label}
                     className="p-4 rounded-xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-sm"
                   >
-                    <span className="text-2xl mb-2 block">{spec.icon}</span>
+                    <span className="text-xs font-mono text-cyan-400 font-bold mb-2 block">{spec.abbr}</span>
                     <div className="text-sm text-slate-500">{spec.label}</div>
                     <div className="text-white font-semibold">{spec.value}</div>
                   </div>

@@ -20,6 +20,12 @@ async function waitForServer(url, maxRetries = 30) {
 async function main() {
   fs.mkdirSync(SCREENSHOTS_DIR, { recursive: true });
 
+  // Kill any existing server on port 3099
+  try {
+    execSync("lsof -ti:3099 | xargs kill -9", { stdio: "pipe" });
+    console.log("Killed existing server on port 3099");
+  } catch { /* no process on port */ }
+
   // Build first
   console.log("Building...");
   execSync("npx next build", { cwd: __dirname, stdio: "pipe" });

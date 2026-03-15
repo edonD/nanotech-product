@@ -2,7 +2,7 @@
 
 > *"Every minute matters. Know resistance in minutes, not days."*
 
-## Current Phase: Complete — Iterating
+## Current Phase: Website V2 — Complete Overhaul
 
 ---
 
@@ -41,31 +41,71 @@ A disposable MEMS microfluidic chip + portable reader delivering antibiotic susc
 | `research/06_funding_and_economics.md` | CARB-X, BARDA funding + hospital economics |
 | `product_brief.md` | Full product brief with specs, market, competition, strategy |
 
-## Website
+## Website V2 — Complete Overhaul
 
 ### Tech Stack
-- Next.js 16 (App Router) + TypeScript + Tailwind CSS v4 + Framer Motion
-- Canvas particle animation, scroll-triggered animations, animated counters
+- Next.js 16 (App Router) + TypeScript + Tailwind CSS v4
+- Framer Motion for scroll animations
+- CSS-based chip & reader visualizations with animated SVG flow particles
+- Component-based architecture — all files under 600 lines
 
-### Sections
-Hero | Problem | Technology | Science Citations | Product | Applications | About | Contact
+### 10 Sections (all rebuilt)
 
-### Visual Quality
-- 3 visual review cycles completed via Puppeteer screenshots
-- Dark deep-blue theme with glassmorphism, gradient accents
-- SVG icons throughout (no emoji dependencies)
-- Responsive desktop + mobile layout
-- Investor-presentation quality
+| Section | Highlights |
+|---------|-----------|
+| **Hero** | Two-column layout, animated MEMS chip visualization with flow particles, stats bar |
+| **Crisis** | Animated death counters, side-by-side workflow timeline (48-72h vs <60min) |
+| **How It Works** | 5-step process with technical specs toggle, "Why Now" convergence cards |
+| **The Chip** | Interactive exploded layer view, fabrication process pipeline (5 steps) |
+| **Reader** | CSS 3D reader with growth curves display, specs grid, expandable features |
+| **Clinical Impact** | Impact metrics, 6 use case cards with scenarios, hospital ROI callout |
+| **Market** | TAM/SAM/SOM cards, full competitive landscape table, business model + regulatory |
+| **Validation** | TRL progress bars for 6 subsystems, risk badges, specs comparison table |
+| **Team** | Founder expertise bars, advisory board, partnership opportunities |
+| **Contact** | Three CTA cards (clinical/investors/collaborators), newsletter signup |
+
+### Component Architecture
+```
+app/components/
+├── Hero/          (index, HeroContent, HeroScene, HeroStats)
+├── Problem/       (index, CrisisStats, Timeline)
+├── HowItWorks/    (index, ProcessStep)
+├── Fabrication/   (index, ExplodedScene, FabricationProcess)
+├── Reader/        (index, ReaderScene)
+├── ClinicalImpact/
+├── Market/
+├── Validation/
+├── Team/
+├── Contact/
+├── three/         (ChipModel, ChipExploded, ReaderModel, Scene)
+├── ui/            (AnimatedSection, AnimatedCounter, GlassCard, SectionHeader)
+├── Navbar.tsx
+└── Footer.tsx
+```
+
+### Visual Design
+- Deep navy (#0a0f1e) background with subtle grid pattern
+- Electric cyan (#00f0ff) + medical teal (#0ea5e9) accents
+- Amber (#f59e0b) for urgency/warnings
+- Glassmorphism cards with backdrop blur
+- Scroll-triggered fade/slide animations
+- Responsive desktop (1920px) + mobile (390px)
 
 ### Run Locally
 ```bash
 cd website && npm install && npm run build && npm start
 ```
 
+### Screenshots
+```bash
+cd website && node screenshot.js
+```
+
 ## Progress Log
 
 | Time | Milestone |
 |------|-----------|
+| 2026-03-15 (7) | **V2 OVERHAUL**: 10 sections rebuilt, chip/reader visualizations, "Why Now" section |
 | 2026-03-15 (6) | Animated counters, updated competitive landscape, economics research |
 | 2026-03-15 (5) | Science citations section, technical validation research |
 | 2026-03-15 (4) | Particle animation, regulatory/manufacturing research |

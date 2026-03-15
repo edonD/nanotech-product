@@ -4,10 +4,8 @@ import { useState } from 'react';
 import SectionHeader from '../ui/SectionHeader';
 import AnimatedSection from '../ui/AnimatedSection';
 import GlassCard from '../ui/GlassCard';
-import dynamic from 'next/dynamic';
 import FabricationProcess from './FabricationProcess';
-
-const ExplodedScene = dynamic(() => import('./ExplodedScene'), { ssr: false });
+import ExplodedScene from './ExplodedScene';
 
 const chipLayers = [
   {
