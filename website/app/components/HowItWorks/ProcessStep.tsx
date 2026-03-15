@@ -116,6 +116,7 @@ export default function ProcessStep({ step, index }: { step: Step; index: number
                   STEP {step.number}
                 </span>
                 <h3 className="text-2xl font-bold text-white">{step.title}</h3>
+                <span className="text-sm text-slate-500">{step.subtitle}</span>
               </div>
             </div>
 

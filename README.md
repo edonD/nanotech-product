@@ -84,11 +84,13 @@ app/components/
 ```
 
 ### Visual Design
-- Deep navy (#0a0f1e) background with subtle grid pattern
+- Deep navy (#0a0f1e) background with subtle grid pattern + diamond dividers
 - Electric cyan (#00f0ff) + medical teal (#0ea5e9) accents
-- Amber (#f59e0b) for urgency/warnings
-- Glassmorphism cards with backdrop blur
-- Scroll-triggered fade/slide animations
+- Amber (#f59e0b) for urgency/warnings, green for positive impact
+- Glassmorphism cards with backdrop blur and hover glow effects
+- Scroll-triggered fade/slide animations + TRL bar fill animations
+- Ambient glow transitions between sections (cyan, amber, green, blue)
+- Animated SVG flow particles in chip visualization
 - Responsive desktop (1920px) + mobile (390px)
 
 ### Run Locally
@@ -105,6 +107,9 @@ cd website && node screenshot.js
 
 | Time | Milestone |
 |------|-----------|
+| 2026-03-15 (10) | Animated TRL bars, section glow transitions, seed round badge, hover effects |
+| 2026-03-15 (9) | Market: CARB-X/BARDA funding alignment card, competitive table RAPIDE highlight |
+| 2026-03-15 (8) | SVG layer patterns, timeline time bars, reader scan line, pulsing stat cards |
 | 2026-03-15 (7) | **V2 OVERHAUL**: 10 sections rebuilt, chip/reader visualizations, "Why Now" section |
 | 2026-03-15 (6) | Animated counters, updated competitive landscape, economics research |
 | 2026-03-15 (5) | Science citations section, technical validation research |
