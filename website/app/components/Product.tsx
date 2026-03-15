@@ -217,7 +217,7 @@ export default function Product() {
               <thead>
                 <tr className="border-b border-white/10">
                   <th className="text-left py-3 pr-4 text-slate-400 font-medium">Feature</th>
-                  <th className="py-3 px-4 text-cyan-400 font-bold">RAPIDE</th>
+                  <th className="py-3 px-4 text-cyan-400 font-bold bg-cyan-500/5 rounded-t-lg">RAPIDE</th>
                   <th className="py-3 px-4 text-slate-500 font-medium">Accelerate WAVE</th>
                   <th className="py-3 px-4 text-slate-500 font-medium">Q-Linea ASTar</th>
                   <th className="py-3 px-4 text-slate-500 font-medium">Standard AST</th>
@@ -279,7 +279,7 @@ export default function Product() {
                     <td className="py-3 pr-4 text-slate-300 font-medium">
                       {row.feature}
                     </td>
-                    <td className="py-3 px-4 text-center font-semibold text-cyan-400">
+                    <td className="py-3 px-4 text-center font-semibold text-cyan-400 bg-cyan-500/5">
                       {row.rapide}
                     </td>
                     <td className="py-3 px-4 text-center text-slate-500">

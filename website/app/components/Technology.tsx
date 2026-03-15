@@ -242,23 +242,35 @@ export default function Technology() {
                   year: "2024-2025",
                   title: "Single-Cell Microfluidic AST",
                   desc: "Multiple groups proved bacterial susceptibility determination from single-cell growth dynamics in <60 minutes. The fundamental science is validated.",
-                  icon: "🔬",
+                  icon: (
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-cyan-400">
+                      <circle cx="12" cy="12" r="3" /><path d="M12 2v4m0 12v4m-7.07-3.93l2.83-2.83m8.48-8.48l2.83-2.83M2 12h4m12 0h4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83" />
+                    </svg>
+                  ),
                 },
                 {
                   year: "2025",
                   title: "MEMS Impedance at Scale",
                   desc: "Interdigitated electrode arrays with 5 µm features on glass/silicon substrates at disposable-chip-compatible costs. Impedance AST is proven; we miniaturize it.",
-                  icon: "⚡",
+                  icon: (
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400">
+                      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                    </svg>
+                  ),
                 },
                 {
                   year: "2024-2025",
                   title: "Edge AI on Microcontrollers",
                   desc: "TinyML inference enables complex growth curve classification on low-power MCUs directly in the reader. No cloud required. Real-time, private, reliable.",
-                  icon: "🧠",
+                  icon: (
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-purple-400">
+                      <path d="M9.5 2A2.5 2.5 0 0112 4.5v15a2.5 2.5 0 01-4.96.44M14.5 2A2.5 2.5 0 0012 4.5v15a2.5 2.5 0 004.96.44" /><path d="M4.2 16.78a2.5 2.5 0 013.3-3.73m8.8 3.73a2.5 2.5 0 00-3.3-3.73" />
+                    </svg>
+                  ),
                 },
               ].map((item, i) => (
                 <div key={i} className="text-center">
-                  <div className="text-4xl mb-4">{item.icon}</div>
+                  <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mx-auto mb-4">{item.icon}</div>
                   <span className="text-xs font-mono text-cyan-400 mb-2 block">
                     {item.year}
                   </span>

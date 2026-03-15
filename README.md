@@ -1,6 +1,6 @@
 # Veridion Microsystems — RAPIDE Chip Platform
 
-## Current Phase: Phase 3 — Website Build & Polish
+## Current Phase: Complete
 
 ## Research Findings
 
@@ -40,7 +40,7 @@ A disposable MEMS microfluidic chip + portable reader that delivers antibiotic s
 | Reader cost | <$5K | $50K-$180K |
 | Operator | Nurse | Lab technician |
 
-## Website Progress
+## Website
 
 ### Sections Completed
 - [x] Hero — gradient text, animated background, stats bar
@@ -52,14 +52,16 @@ A disposable MEMS microfluidic chip + portable reader that delivers antibiotic s
 - [x] Contact — 3 CTA cards, email
 - [x] Footer
 - [x] Responsive mobile layout
-- [x] Framer Motion animations throughout
+- [x] Framer Motion scroll-triggered animations
 
 ### Visual Quality Assessment
 - Dark deep-blue background with subtle gradients and grid pattern
 - Glassmorphism cards with backdrop blur
-- Smooth scroll-triggered animations
+- Smooth scroll-triggered animations on all sections
 - Clean typography with generous spacing
-- Professional, authoritative feel — ready for investor presentation
+- SVG icons throughout (no emoji dependencies)
+- Professional, authoritative feel — investor-presentation ready
+- 3 visual review cycles completed
 
 ### Tech Stack
 - Next.js 16 (App Router)
@@ -69,11 +71,18 @@ A disposable MEMS microfluidic chip + portable reader that delivers antibiotic s
 - Puppeteer for visual review
 
 ## What's New
-- **2026-03-15 (3)**: Website v1 complete with all 7 sections. SVG icons fixed. Visual review cycle 1 passed — site looks polished and professional.
-- **2026-03-15 (2)**: Phase 2 complete — product brief written for Veridion RAPIDE chip platform. Evaluated 5 candidates against all criteria.
-- **2026-03-15 (1)**: Phase 1 complete — exhaustive research across nanotech, BioMEMS, microsystems. 3 research documents saved.
+- **2026-03-15 (4)**: Visual review cycle 2+3 complete. Replaced all emojis with SVGs, enhanced comparison table, verified full-page and mobile rendering. Final build verified.
+- **2026-03-15 (3)**: Website v1 complete with all 7 sections.
+- **2026-03-15 (2)**: Phase 2 complete — product brief written for Veridion RAPIDE chip platform.
+- **2026-03-15 (1)**: Phase 1 complete — exhaustive research across nanotech, BioMEMS, microsystems.
 
-## Next Up
-- Visual review cycle 2 — additional polish
-- Final build verification
-- Push to remote
+## Running the Website
+
+```bash
+cd website
+npm install
+npm run build
+npm start
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
