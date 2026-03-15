@@ -1,13 +1,15 @@
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Problem from "./components/Problem";
-import Technology from "./components/Technology";
-import Science from "./components/Science";
-import Product from "./components/Product";
-import Applications from "./components/Applications";
-import About from "./components/About";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import Problem from './components/Problem';
+import HowItWorks from './components/HowItWorks';
+import Fabrication from './components/Fabrication';
+import Reader from './components/Reader';
+import ClinicalImpact from './components/ClinicalImpact';
+import Market from './components/Market';
+import Validation from './components/Validation';
+import Team from './components/Team';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
 
 export default function Home() {
   return (
@@ -17,14 +19,19 @@ export default function Home() {
       <div className="section-divider" />
       <Problem />
       <div className="section-divider" />
-      <Technology />
-      <Science />
+      <HowItWorks />
       <div className="section-divider" />
-      <Product />
+      <Fabrication />
       <div className="section-divider" />
-      <Applications />
+      <Reader />
       <div className="section-divider" />
-      <About />
+      <ClinicalImpact />
+      <div className="section-divider" />
+      <Market />
+      <div className="section-divider" />
+      <Validation />
+      <div className="section-divider" />
+      <Team />
       <div className="section-divider" />
       <Contact />
       <Footer />

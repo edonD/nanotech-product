@@ -20,16 +20,16 @@ async function waitForServer(url, maxRetries = 30) {
 async function main() {
   fs.mkdirSync(SCREENSHOTS_DIR, { recursive: true });
 
-  // Start dev server
-  console.log("Starting Next.js dev server...");
+  // Build first
+  console.log("Building...");
+  execSync("npx next build", { cwd: __dirname, stdio: "pipe" });
+
+  // Start production server
+  console.log("Starting Next.js production server...");
   const server = spawn("npx", ["next", "start", "-p", "3099"], {
     cwd: __dirname,
     stdio: "pipe",
   });
-
-  // Build first
-  console.log("Building...");
-  execSync("npx next build", { cwd: __dirname, stdio: "pipe" });
 
   console.log("Waiting for server...");
   await waitForServer("http://localhost:3099");
@@ -37,7 +37,7 @@ async function main() {
 
   const browser = await puppeteer.launch({
     headless: true,
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-gpu"],
   });
 
   try {
@@ -45,15 +45,17 @@ async function main() {
     console.log("Taking desktop screenshot...");
     const desktopPage = await browser.newPage();
     await desktopPage.setViewport({ width: 1920, height: 1080 });
-    await desktopPage.goto("http://localhost:3099", { waitUntil: "networkidle0", timeout: 30000 });
-    await new Promise((r) => setTimeout(r, 2000)); // Wait for animations
+    await desktopPage.goto("http://localhost:3099", { waitUntil: "networkidle0", timeout: 60000 });
+    await new Promise((r) => setTimeout(r, 3000)); // Wait for animations + 3D
     await desktopPage.screenshot({
       path: path.join(SCREENSHOTS_DIR, "desktop-full.png"),
       fullPage: true,
     });
     console.log("Desktop full page saved.");
 
-    // Desktop viewport
+    // Desktop viewport (hero)
+    await desktopPage.evaluate(() => window.scrollTo(0, 0));
+    await new Promise((r) => setTimeout(r, 500));
     await desktopPage.screenshot({
       path: path.join(SCREENSHOTS_DIR, "desktop-hero.png"),
       fullPage: false,
@@ -61,12 +63,12 @@ async function main() {
     console.log("Desktop hero saved.");
 
     // Scroll to each section
-    const sections = ["problem", "technology", "product", "applications", "about", "contact"];
+    const sections = ["crisis", "how-it-works", "chip", "reader", "impact", "market", "validation", "team", "contact"];
     for (const section of sections) {
       await desktopPage.evaluate((id) => {
         document.getElementById(id)?.scrollIntoView({ behavior: "instant" });
       }, section);
-      await new Promise((r) => setTimeout(r, 1000));
+      await new Promise((r) => setTimeout(r, 1500));
       await desktopPage.screenshot({
         path: path.join(SCREENSHOTS_DIR, `desktop-${section}.png`),
         fullPage: false,
@@ -79,8 +81,8 @@ async function main() {
     console.log("Taking mobile screenshot...");
     const mobilePage = await browser.newPage();
     await mobilePage.setViewport({ width: 390, height: 844 });
-    await mobilePage.goto("http://localhost:3099", { waitUntil: "networkidle0", timeout: 30000 });
-    await new Promise((r) => setTimeout(r, 2000));
+    await mobilePage.goto("http://localhost:3099", { waitUntil: "networkidle0", timeout: 60000 });
+    await new Promise((r) => setTimeout(r, 3000));
     await mobilePage.screenshot({
       path: path.join(SCREENSHOTS_DIR, "mobile-full.png"),
       fullPage: true,

@@ -1,136 +1,138 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
-  { label: "Problem", href: "#problem" },
-  { label: "Technology", href: "#technology" },
-  { label: "Product", href: "#product" },
-  { label: "Applications", href: "#applications" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: 'Crisis', href: '#crisis' },
+  { label: 'How It Works', href: '#how-it-works' },
+  { label: 'The Chip', href: '#chip' },
+  { label: 'Reader', href: '#reader' },
+  { label: 'Impact', href: '#impact' },
+  { label: 'Market', href: '#market' },
+  { label: 'Validation', href: '#validation' },
+  { label: 'Team', href: '#team' },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
+  const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
-    const onScroll = () => {
+    const handleScroll = () => {
       setScrolled(window.scrollY > 50);
 
-      // Track active section
       const sections = navLinks.map((l) => l.href.slice(1));
-      let current = "";
-      for (const id of sections) {
-        const el = document.getElementById(id);
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sections[i]);
         if (el) {
           const rect = el.getBoundingClientRect();
-          if (rect.top <= 200) current = id;
+          if (rect.top <= 150) {
+            setActiveSection(sections[i]);
+            break;
+          }
         }
       }
-      setActiveSection(current);
     };
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-[#030712]/80 backdrop-blur-xl border-b border-white/5"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-3 group">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center">
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="white"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M12 2L2 7l10 5 10-5-10-5z" />
-              <path d="M2 17l10 5 10-5" />
-              <path d="M2 12l10 5 10-5" />
-            </svg>
-          </div>
-          <span className="text-lg font-bold tracking-tight text-white">
-            Veridion
-          </span>
-        </a>
-
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className={`text-sm transition-colors duration-200 ${
-                activeSection === link.href.slice(1)
-                  ? "text-cyan-400"
-                  : "text-slate-400 hover:text-cyan-400"
-              }`}
-            >
-              {link.label}
+    <>
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          scrolled
+            ? 'bg-[#0a0f1e]/80 backdrop-blur-xl border-b border-white/[0.05]'
+            : 'bg-transparent'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <a href="#hero" className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
+                <span className="text-white font-bold text-sm">V</span>
+              </div>
+              <span className="text-white font-bold text-lg tracking-tight">Veridion</span>
             </a>
-          ))}
-          <a
-            href="#contact"
-            className="text-sm font-medium px-5 py-2 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-200"
-          >
-            Get Early Access
-          </a>
-        </div>
 
-        <button
-          className="md:hidden text-white"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            {mobileOpen ? (
-              <path d="M18 6L6 18M6 6l12 12" />
-            ) : (
-              <path d="M3 12h18M3 6h18M3 18h18" />
-            )}
-          </svg>
-        </button>
-      </div>
-
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[#030712]/95 backdrop-blur-xl border-b border-white/5"
-          >
-            <div className="px-6 py-4 flex flex-col gap-4">
+            <div className="hidden lg:flex items-center gap-1">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="text-sm text-slate-400 hover:text-cyan-400 py-2"
+                  className={`px-3 py-1.5 rounded-lg text-sm transition-all duration-300 ${
+                    activeSection === link.href.slice(1)
+                      ? 'text-cyan-400 bg-cyan-500/[0.08]'
+                      : 'text-slate-400 hover:text-white hover:bg-white/[0.04]'
+                  }`}
                 >
                   {link.label}
                 </a>
               ))}
             </div>
+
+            <div className="flex items-center gap-3">
+              <a
+                href="#contact"
+                className="hidden md:inline-flex items-center px-4 py-2 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-sm font-semibold transition-all hover:shadow-[0_0_20px_rgba(0,240,255,0.25)] hover:scale-[1.02]"
+              >
+                Get Early Access
+              </a>
+              <button
+                onClick={() => setMobileOpen(!mobileOpen)}
+                className="lg:hidden p-2 text-slate-400 hover:text-white"
+                aria-label="Toggle menu"
+              >
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  {mobileOpen ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  )}
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="fixed inset-x-0 top-16 z-40 bg-[#0a0f1e]/95 backdrop-blur-xl border-b border-white/[0.05] lg:hidden"
+          >
+            <div className="max-w-7xl mx-auto px-6 py-4 space-y-1">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className={`block px-4 py-2.5 rounded-lg text-sm transition-all ${
+                    activeSection === link.href.slice(1)
+                      ? 'text-cyan-400 bg-cyan-500/[0.08]'
+                      : 'text-slate-400 hover:text-white hover:bg-white/[0.04]'
+                  }`}
+                >
+                  {link.label}
+                </a>
+              ))}
+              <a
+                href="#contact"
+                onClick={() => setMobileOpen(false)}
+                className="block px-4 py-2.5 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-sm font-semibold text-center mt-2"
+              >
+                Get Early Access
+              </a>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </>
   );
 }
