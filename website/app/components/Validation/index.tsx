@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
 import SectionHeader from '../ui/SectionHeader';
 import AnimatedSection from '../ui/AnimatedSection';
 import GlassCard from '../ui/GlassCard';
@@ -54,11 +55,75 @@ const specsComparison = [
   { param: 'Sample type', rapide: 'Direct from patient', standard: 'Requires overnight culture' },
   { param: 'Operator skill', rapide: 'Nurse-level', standard: 'Lab technician' },
   { param: 'Antibiotics tested', rapide: '12 per chip', standard: '12-20 per panel' },
-  { param: 'Sample volume', rapide: '100 µL', standard: '1-10 mL' },
-  { param: 'Detection limit', rapide: '12 CFU/mL', standard: '~10⁵ CFU/mL' },
+  { param: 'Sample volume', rapide: '100 \u00b5L', standard: '1-10 mL' },
+  { param: 'Detection limit', rapide: '12 CFU/mL', standard: '~10\u2075 CFU/mL' },
   { param: 'Reader cost', rapide: '< $5,000', standard: '$50,000-$180,000' },
   { param: 'Portability', rapide: '4.8 kg portable', standard: 'Fixed laboratory' },
 ];
+
+function TRLBar({ trl, visible }: { trl: number; visible: boolean }) {
+  return (
+    <div className="flex items-center gap-2 mb-3">
+      <span className="text-xs text-slate-500 font-mono">TRL</span>
+      <div className="flex-1 h-2 bg-white/[0.05] rounded-full overflow-hidden">
+        <div
+          className="h-full bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full transition-all duration-1000 ease-out"
+          style={{ width: visible ? `${(trl / 9) * 100}%` : '0%' }}
+        />
+      </div>
+      <span className="text-xs text-cyan-400 font-mono font-bold">{trl}/9</span>
+    </div>
+  );
+}
+
+function SubsystemCard({ sub, index }: { sub: typeof subsystems[0]; index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const riskGlow = sub.risk === 'Low'
+    ? 'hover:shadow-[0_0_25px_rgba(74,222,128,0.15)]'
+    : 'hover:shadow-[0_0_25px_rgba(251,191,36,0.15)]';
+
+  return (
+    <AnimatedSection delay={index * 0.08}>
+      <div ref={ref}>
+        <GlassCard className={`h-full transition-all duration-500 hover:scale-[1.03] ${riskGlow}`}>
+          <div className="flex items-center justify-between mb-3">
+            <h4 className="text-white font-semibold text-sm">{sub.name}</h4>
+            <span className={`text-xs font-mono px-2 py-0.5 rounded-full ${
+              sub.risk === 'Low'
+                ? 'bg-green-500/10 text-green-400 border border-green-500/20'
+                : 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
+            }`}>
+              {sub.risk} Risk
+            </span>
+          </div>
+
+          <TRLBar trl={sub.trl} visible={visible} />
+
+          <p className="text-xs text-slate-500 leading-relaxed mb-3">{sub.detail}</p>
+
+          <div className="border-t border-white/[0.05] pt-2">
+            {sub.citations.map((cite) => (
+              <div key={cite} className="text-xs text-slate-600 font-mono">{cite}</div>
+            ))}
+          </div>
+        </GlassCard>
+      </div>
+    </AnimatedSection>
+  );
+}
 
 export default function Validation() {
   return (
@@ -75,40 +140,7 @@ export default function Validation() {
         {/* TRL Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
           {subsystems.map((sub, i) => (
-            <AnimatedSection key={sub.name} delay={i * 0.08}>
-              <GlassCard className="h-full">
-                <div className="flex items-center justify-between mb-3">
-                  <h4 className="text-white font-semibold text-sm">{sub.name}</h4>
-                  <span className={`text-xs font-mono px-2 py-0.5 rounded-full ${
-                    sub.risk === 'Low'
-                      ? 'bg-green-500/10 text-green-400 border border-green-500/20'
-                      : 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
-                  }`}>
-                    {sub.risk} Risk
-                  </span>
-                </div>
-
-                {/* TRL bar */}
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="text-xs text-slate-500 font-mono">TRL</span>
-                  <div className="flex-1 h-2 bg-white/[0.05] rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full transition-all duration-1000"
-                      style={{ width: `${(sub.trl / 9) * 100}%` }}
-                    />
-                  </div>
-                  <span className="text-xs text-cyan-400 font-mono font-bold">{sub.trl}/9</span>
-                </div>
-
-                <p className="text-xs text-slate-500 leading-relaxed mb-3">{sub.detail}</p>
-
-                <div className="border-t border-white/[0.05] pt-2">
-                  {sub.citations.map((cite) => (
-                    <div key={cite} className="text-xs text-slate-600 font-mono">{cite}</div>
-                  ))}
-                </div>
-              </GlassCard>
-            </AnimatedSection>
+            <SubsystemCard key={sub.name} sub={sub} index={i} />
           ))}
         </div>
 
@@ -117,20 +149,20 @@ export default function Validation() {
           <h3 className="text-2xl font-bold text-white text-center mb-8">
             RAPIDE vs. State of the Art
           </h3>
-          <div className="max-w-3xl mx-auto overflow-x-auto">
+          <div className="max-w-3xl mx-auto overflow-x-auto rounded-xl border border-white/[0.06] bg-white/[0.01]">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-white/[0.08]">
                   <th className="text-left py-3 px-4 text-slate-500 font-mono text-xs">Parameter</th>
-                  <th className="text-center py-3 px-4 text-cyan-400 font-mono text-xs">RAPIDE</th>
+                  <th className="text-center py-3 px-4 text-cyan-400 font-mono text-xs bg-cyan-500/[0.04]">RAPIDE</th>
                   <th className="text-center py-3 px-4 text-slate-500 font-mono text-xs">Current Standard</th>
                 </tr>
               </thead>
               <tbody>
-                {specsComparison.map((row) => (
-                  <tr key={row.param} className="border-b border-white/[0.04]">
+                {specsComparison.map((row, i) => (
+                  <tr key={row.param} className={`border-b border-white/[0.04] ${i % 2 === 0 ? 'bg-white/[0.01]' : ''}`}>
                     <td className="py-3 px-4 text-slate-400">{row.param}</td>
-                    <td className="text-center py-3 px-4 text-cyan-400 font-semibold">{row.rapide}</td>
+                    <td className="text-center py-3 px-4 text-cyan-400 font-semibold bg-cyan-500/[0.04]">{row.rapide}</td>
                     <td className="text-center py-3 px-4 text-slate-500">{row.standard}</td>
                   </tr>
                 ))}

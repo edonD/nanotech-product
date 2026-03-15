@@ -18,17 +18,22 @@ export default function Home() {
       <Hero />
       <div className="section-divider" />
       <Problem />
+      <div className="section-glow section-glow-amber" />
       <div className="section-divider" />
       <HowItWorks />
       <div className="section-divider" />
+      <div className="section-glow section-glow-cyan" />
       <Fabrication />
       <div className="section-divider" />
+      <div className="section-glow section-glow-cyan" />
       <Reader />
       <div className="section-divider" />
+      <div className="section-glow section-glow-green" />
       <ClinicalImpact />
       <div className="section-divider" />
       <Market />
       <div className="section-divider" />
+      <div className="section-glow section-glow-blue" />
       <Validation />
       <div className="section-divider" />
       <Team />
