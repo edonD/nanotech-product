@@ -1,8 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import AnimatedCounter from "./AnimatedCounter";
 
 function AnimatedSection({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   const ref = useRef(null);
@@ -45,19 +45,25 @@ export default function Problem() {
         <div className="grid md:grid-cols-3 gap-6 mb-16">
           {[
             {
-              number: "1.27M",
+              number: 1.27,
+              suffix: "M",
+              decimals: 2,
               label: "Direct deaths per year from drug-resistant bacteria",
               subtext: "More than HIV or malaria",
               color: "red",
             },
             {
-              number: "4.95M",
+              number: 4.95,
+              suffix: "M",
+              decimals: 2,
               label: "Deaths per year associated with AMR",
               subtext: "A hidden pandemic",
               color: "orange",
             },
             {
-              number: "39M",
+              number: 39,
+              suffix: "M",
+              decimals: 0,
               label: "Projected additional deaths by 2050",
               subtext: "If we don't act now",
               color: "amber",
@@ -74,7 +80,7 @@ export default function Problem() {
                       : "text-amber-400"
                   }`}
                 >
-                  {stat.number}
+                  <AnimatedCounter end={stat.number} suffix={stat.suffix} decimals={stat.decimals} duration={2500} />
                 </div>
                 <p className="text-white font-medium mb-2">{stat.label}</p>
                 <p className="text-sm text-slate-500">{stat.subtext}</p>
