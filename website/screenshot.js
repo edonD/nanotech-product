@@ -52,21 +52,35 @@ async function main() {
     const desktopPage = await browser.newPage();
     await desktopPage.setViewport({ width: 1920, height: 1080 });
     await desktopPage.goto("http://localhost:3099", { waitUntil: "networkidle0", timeout: 60000 });
-    await new Promise((r) => setTimeout(r, 3000)); // Wait for animations + 3D
-    await desktopPage.screenshot({
-      path: path.join(SCREENSHOTS_DIR, "desktop-full.png"),
-      fullPage: true,
-    });
-    console.log("Desktop full page saved.");
+    await new Promise((r) => setTimeout(r, 2000));
 
-    // Desktop viewport (hero)
-    await desktopPage.evaluate(() => window.scrollTo(0, 0));
-    await new Promise((r) => setTimeout(r, 500));
+    // Pre-scroll through entire page to trigger all whileInView animations
+    console.log("Triggering scroll animations...");
+    await desktopPage.evaluate(async () => {
+      const scrollHeight = document.body.scrollHeight;
+      const step = window.innerHeight / 2;
+      for (let y = 0; y < scrollHeight; y += step) {
+        window.scrollTo(0, y);
+        await new Promise((r) => setTimeout(r, 300));
+      }
+      window.scrollTo(0, 0);
+      await new Promise((r) => setTimeout(r, 500));
+    });
+    await new Promise((r) => setTimeout(r, 1000));
+
+    // Desktop hero (viewport only)
     await desktopPage.screenshot({
       path: path.join(SCREENSHOTS_DIR, "desktop-hero.png"),
       fullPage: false,
     });
     console.log("Desktop hero saved.");
+
+    // Full page (after all animations triggered)
+    await desktopPage.screenshot({
+      path: path.join(SCREENSHOTS_DIR, "desktop-full.png"),
+      fullPage: true,
+    });
+    console.log("Desktop full page saved.");
 
     // Scroll to each section
     const sections = ["crisis", "how-it-works", "chip", "reader", "impact", "market", "validation", "team", "contact"];
@@ -88,7 +102,21 @@ async function main() {
     const mobilePage = await browser.newPage();
     await mobilePage.setViewport({ width: 390, height: 844 });
     await mobilePage.goto("http://localhost:3099", { waitUntil: "networkidle0", timeout: 60000 });
-    await new Promise((r) => setTimeout(r, 3000));
+    await new Promise((r) => setTimeout(r, 2000));
+
+    // Pre-scroll to trigger mobile animations
+    await mobilePage.evaluate(async () => {
+      const scrollHeight = document.body.scrollHeight;
+      const step = window.innerHeight / 2;
+      for (let y = 0; y < scrollHeight; y += step) {
+        window.scrollTo(0, y);
+        await new Promise((r) => setTimeout(r, 200));
+      }
+      window.scrollTo(0, 0);
+      await new Promise((r) => setTimeout(r, 500));
+    });
+    await new Promise((r) => setTimeout(r, 500));
+
     await mobilePage.screenshot({
       path: path.join(SCREENSHOTS_DIR, "mobile-full.png"),
       fullPage: true,
