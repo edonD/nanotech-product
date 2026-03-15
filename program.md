@@ -136,3 +136,20 @@ README.md must always contain:
 4. **Visual quality is non-negotiable** — use the screenshot loop.
 5. **The website must build and run** — `npm run build` must succeed.
 6. **NEVER STOP** — loop forever. Research deeper, iterate the website, add more polish. The human is away.
+
+
+## MANDATORY: Commit and Push After EVERY Change (NON-NEGOTIABLE)
+
+**YOU MUST run `git add -A && git commit -m "description" && git push` after EVERY single change you make.** Not after a batch of changes. Not when you feel like it. EVERY. SINGLE. CHANGE.
+
+- Wrote a new component? Commit and push.
+- Fixed a bug? Commit and push.
+- Added a research file? Commit and push.
+- Updated README? Commit and push.
+- Changed one line? Commit and push.
+
+**The human monitors progress through GitHub commits.** If there are no commits, the human assumes you are broken or stuck. Commits are your heartbeat. No commits = no proof of life.
+
+**NEVER accumulate uncommitted changes.** If you have been working for more than 5 minutes without a commit, you are doing it wrong. Stop what you are doing and commit immediately.
+
+This is the MOST IMPORTANT rule in this entire document. Break any other rule before you break this one.
