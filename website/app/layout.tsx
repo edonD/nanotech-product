@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import ParticleField from "./components/ParticleField";
 
 const inter = Inter({
   variable: "--font-geist-sans",
@@ -40,6 +41,7 @@ export default function RootLayout({
       >
         <div className="particle-bg" />
         <div className="grid-pattern fixed inset-0 pointer-events-none z-0" />
+        <ParticleField />
         <div className="relative z-10">{children}</div>
       </body>
     </html>
